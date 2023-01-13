@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace ： 需要被映射的接口全类名 -->
+<mapper namespace="com.atguigu.mybatis.mapper.UserMapper">
+
+    <!--     User queryUserByUsername(String username)  -->
+    <select id="queryUserByUsername" resultType="User">
+        select * from `user` where `username` = #{param1}
+    </select>
+
+    <!--     User checkLogin(String username,String password); -->
+    <select id="checkLogin" resultType="User">
+        select * from `user` where `username` = #{param1} and `password` = #{param2}
+    </select>
+
+    <!--      User checkLoginByMap(Map<String,Object> map)  -->
+    <select id="checkLoginByMap" resultType="User">
+        select * from `user` where `username` = #{username} and `password` = #{password}
+    </select>
+
+    <!--     int addUser(User user)  -->
+    <insert id="addUser">
+        insert into `user` values(null,#{username},#{password},#{gender})
+    </insert>
+
+    <!--  User signIn(@Param("username")String username,@Param("password")String password) -->
+    <select id="signIn" resultType="User">
+        select * from `user` where `username` = #{username} and `password` = #{password}
+    </select>
+
+    <!--  User queryUserByUsernameFromParam(@Param("username") String username) -->
+    <select id="queryUserByUsernameFromParam" resultType="User">
+        select * from `user` where `username` = #{username}
+    </select>
+
+
+    <!-- int deleteUserByParam(@Param("id") Integer id) -->
+    <delete id="deleteUserByParam">
+        delete from  `user` where `id` = #{id}
+    </delete>
+
+    <!--  int updateUserByParam(@Param("username")String username,@Param("password")String password,@Param("gender")String gender,@Param("id")Integer id)-->
+    <update id="updateUserByParam">
+        update `user` set `username` = #{username} ,`password` = #{password},`gender` = #{gender} where `id` = #{id}
+    </update>
+
+    <!-- Integer count(); -->
+    <select id="count" resultType="Integer">
+        select count(*) from `user`
+    </select>
+
+    <!--  String queryUsernameById(@Param("id") Integer id); -->
+    <select id="queryUsernameById" resultType="String">
+        select `username` from `user` where `id` = #{id};
+    </select>
+
+    <!-- Map<String, Object> queryUserByIdToMap(@Param("id") Integer id);  -->
+    <select id="queryUserByIdToMap" resultType="Map">
+        select * from `user` where `id` = #{id}
+    </select>
+
+    <!-- List<Map<String,Object>> queryByAllUsersToMap(); -->
+    <select id="queryByAllUsersToMap" resultType="Map">
+        select * from `user`
+    </select>
+
+    <!-- Map<String,Object> selectAllUsersToMap(); -->
+    <select id="selectAllUsersToMap" resultType="Map">
+        select * from `user`
+    </select>
+
+    <!-- List<User> list(); -->
+    <select id="list" resultType="User">
+        select * from `user`
+    </select>
+
+
+
+</mapper>

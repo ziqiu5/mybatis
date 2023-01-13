@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace ： 需要被映射的接口全类名 -->
+<mapper namespace="com.atguigu.mybatis.mapper.UserMapper">
+    <!-- int addUser() -->
+    <insert id="addUser" >
+        insert into `user` values(null,'小明','123','男');
+    </insert>
+
+    <!--      int updateUser(User user); -->
+    <update id="updateUser">
+        update `user` set `username` = '小美',`password` = '798' , `gender`='女' where `id` = 1
+    </update>
+
+
+    <!--    int deleteUser(int id);-->
+    <delete id="deleteUser">
+        delete from `user` where `id` = 7
+    </delete>
+
+    <!-- User queryUserById(); -->
+    <select id="queryUserById" resultType="User">
+        select * from `user` where `id` = 3
+    </select>
+
+    <!--     List<User> list(); -->
+    <select id="list" resultType="User">
+        select * from `user`
+    </select>
+
+
+</mapper>

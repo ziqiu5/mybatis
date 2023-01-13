@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace ： 需要被映射的接口全类名 -->
+<mapper namespace="com.atguigu.mybatis.mapper.SpecialSqlMapper">
+
+    <!-- List<User> queryByLikeForUsername(@Param("likeUsername") String likeUsername);  -->
+    <select id="queryByLikeForUsername" resultType="User">
+        <!--
+            模糊查询的三种方式:
+            1. 使用字符串拼接的方式 ${xxx} 注意的是 ${xxx} 字符串拼接时需要加''
+            2. 使用 mysql 中的字符串拼接函数 concat()
+            3. 使用 双引号 加 占位符的方式 "%"#{likeUsername}"%" (常用)
+        -->
+        <!-- select * from `user` where `username` like '%${likeUsername}%' -->
+        <!--select * from `user` where `username` like concat('%',#{likeUsername},'%');-->
+        select * from `user` where `username` like "%"#{likeUsername}"%"
+    </select>
+
+
+    <!-- Integer batchDeleteById(@Param("ids")String ids); -->
+    <delete id="batchDeleteById">
+        delete from `user` where `id` in (${ids})
+    </delete>
+
+
+</mapper>
