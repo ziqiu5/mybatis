@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace ： 需要被映射的接口全类名 -->
+<mapper namespace="com.atguigu.mybatis.mapper.EmpMapper">
+
+    <!--  自定义映射 -->
+    <resultMap id="empResultMap" type="Emp">
+        <id column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+    </resultMap>
+    <!--     Emp queryEmpById(Integer empId); -->
+    <select id="queryEmpById" resultMap="empResultMap">
+        select * from `t_emp` where `emp_id` = #{empId}
+    </select>
+
+    <!--     Emp queryEmpById(Integer empId); -->
+    <!--<select id="queryEmpById" resultType="Emp">-->
+        <!--select * from `t_emp` where `emp_id` = #{empId}-->
+    <!--</select>-->
+
+</mapper>
