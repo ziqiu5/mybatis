@@ -17,6 +17,15 @@
     <settings>
         <!--  配置将符合mysql中的属性命名要求的下划线 映射 到符合java属性命名规范的驼峰形式 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 配置延迟加载(两个配置)
+               1. lazyLoadingEnabled 懒加载(延迟加载) 默认是false是不开启的 需要将其开启
+               2. aggressiveLazyLoading 按需加载，默认是false 是不开启的 即不需要按照你写的
+               所有sql都去执行,如果设置为true的话 就是不管需要的是什么 它都会按照你写的所有sql都去执行
+            -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+
     </settings>
 
     <!--  配置实体类别名 -->

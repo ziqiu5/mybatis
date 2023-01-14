@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * ClassName: SpecialSqlTest
- * Package: com.atguigu.mybatis.test
+ * Package: com.atguigu.mybatis.Test01
  * Description:
  *
  * @author ziqiu

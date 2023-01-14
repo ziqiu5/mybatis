@@ -18,7 +18,7 @@ import java.io.InputStream;
  * @Version: v1.0
  */
 
-
+@SuppressWarnings("all")
 public class SqlSessionUtil {
 
     public static SqlSession getSqlSession(String mybatisCoreXml) {

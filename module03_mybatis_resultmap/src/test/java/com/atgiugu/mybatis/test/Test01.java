@@ -26,4 +26,22 @@ public class Test01 {
         Emp emp = empMapper.queryEmpById(1);
         System.out.println(emp);
     }
+
+    @Test
+    public void testEmpAndDeptByEmpId(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession("MyBatisConfig.xml");
+        EmpMapper empMapper = sqlSession.getMapper(EmpMapper.class);
+        Emp emp = empMapper.queryEmpAndDeptById(2);
+        System.out.println(emp);
+    }
+
+    @Test
+    public void testEmpAndDeptByStep(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession("MyBatisConfig.xml");
+        EmpMapper empMapper = sqlSession.getMapper(EmpMapper.class);
+        Emp emp = empMapper.queryEmpAndDeptByStepOne(4);
+        System.out.println("员工姓名：" + emp.getEmpName());
+    }
+
+
 }

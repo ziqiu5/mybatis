@@ -23,4 +23,40 @@
         <!--select * from `t_emp` where `emp_id` = #{empId}-->
     <!--</select>-->
 
+
+    <resultMap id="empAndDeptById" type="Emp">
+        <id column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <!--<result column="emp_id" property="dept.deptId"/>-->
+        <!--<result column="emp_name" property="dept.deptName"/>-->
+        <association property="dept" javaType="Dept" fetchType="eager">
+            <id column="dept_id" property="deptId" />
+            <result column="dept_name" property="deptName"/>
+        </association>
+    </resultMap>
+    <!--Emp queryEmpAndDeptById(@Param("empId") Integer empId); -->
+    <select id="queryEmpAndDeptById" resultMap="empAndDeptById">
+        SELECT emp.*,dept.*
+        FROM `t_emp` emp LEFT JOIN `t_dept` dept ON emp.`dept_id` = dept.`dept_id`
+        WHERE `emp_id` = #{empId}
+    </select>
+
+
+
+    <resultMap id="empAndDeptByStepResultMap" type="Emp">
+        <id column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <association property="dept"
+                     column="dept_id"
+                     select="com.atguigu.mybatis.mapper.DeptMapper.queryEmpAndDeptByStepTwo"/>
+    </resultMap>
+    <!-- Emp queryEmpAndDeptByStepOne(@Param("empId") Integer empId); -->
+    <select id="queryEmpAndDeptByStepOne" resultMap="empAndDeptByStepResultMap">
+          select * from `t_emp` where `emp_id`  = #{empId}
+    </select>
+
+
+
 </mapper>

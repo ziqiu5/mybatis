@@ -16,7 +16,7 @@
 
     <settings>
         <!--  配置将符合mysql中的属性命名要求的下划线 映射 到符合java属性命名规范的驼峰形式 -->
-        <setting name="mapUnderscoreToCamel" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     
     <!--  配置实体类别名 -->

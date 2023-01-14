@@ -18,4 +18,9 @@ public interface EmpMapper {
 
     Emp queryEmpById(@Param("empId") Integer empId);
 
+
+    Emp queryEmpAndDeptById(@Param("empId") Integer empId);
+
+    Emp queryEmpAndDeptByStepOne(@Param("empId") Integer empId);
+
 }

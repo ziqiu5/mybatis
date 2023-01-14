@@ -22,12 +22,12 @@
     </select>
 
     <!--     int addUser(User user)  -->
-    <insert id="addUser">
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
         insert into `user` values(null,#{username},#{password},#{gender})
     </insert>
 
-    <!--  User signIn(@Param("username")String username,@Param("password")String password) -->
-    <select id="signIn" resultType="User">
+    <!--   User signInByParam(@Param("username") String username, @Param("password") String password); -->
+    <select id="signInByParam" resultType="User">
         select * from `user` where `username` = #{username} and `password` = #{password}
     </select>
 

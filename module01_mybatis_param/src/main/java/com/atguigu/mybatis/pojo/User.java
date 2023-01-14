@@ -13,7 +13,7 @@ package com.atguigu.mybatis.pojo;
 
 public class User {
 
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String gender;
@@ -28,18 +28,11 @@ public class User {
         this.gender = gender;
     }
 
-    public User(int id, String username, String password, String gender) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.gender = gender;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

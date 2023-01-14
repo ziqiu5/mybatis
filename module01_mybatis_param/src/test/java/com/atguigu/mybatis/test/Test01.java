@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ClassName: test
+ * ClassName: Test01
  * Package: com.atguigu.mybatis
  * Description:
  *
@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 
-public class test {
+public class Test01 {
     @Test
     public void testQueryByUsername() {
         SqlSession sqlSession = SqlSessionUtil.getSqlSession("MyBatisConfig.xml");
@@ -59,7 +59,9 @@ public class test {
         SqlSession sqlSession = SqlSessionUtil.getSqlSession("MyBatisConfig.xml");
         //获取 映射接口的代理实现类对象
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        userMapper.addUser(new User(null, "huoRenDuoDuo", "799456", "男"));
+        User user = new User(null, "huoRenDuoDuo", "799456", "男");
+        userMapper.addUser(user);
+        System.out.println(user);
     }
 
 
