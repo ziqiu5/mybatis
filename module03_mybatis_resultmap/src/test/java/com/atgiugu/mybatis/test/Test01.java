@@ -42,6 +42,11 @@ public class Test01 {
         Emp emp = empMapper.queryEmpAndDeptByStepOne(4);
         System.out.println("员工姓名：" + emp.getEmpName());
     }
+   
+    @Test
+    public void testPullFromGitHub(){
+        System.out.println("testPullFromGitHub!");
+    }
 
 
 }
