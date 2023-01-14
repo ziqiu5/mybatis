@@ -3,6 +3,8 @@ package com.atguigu.mybatis.mapper;
 import com.atguigu.mybatis.pojo.Emp;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * ClassName: EmpMapper
  * Package: com.atguigu.mybatis.mapper
@@ -18,9 +20,10 @@ public interface EmpMapper {
 
     Emp queryEmpById(@Param("empId") Integer empId);
 
-
     Emp queryEmpAndDeptById(@Param("empId") Integer empId);
 
     Emp queryEmpAndDeptByStepOne(@Param("empId") Integer empId);
+
+    List<Emp> queryDeptAndEmpByStepTwo(@Param("deptId") Integer deptId);
 
 }

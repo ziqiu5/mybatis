@@ -18,4 +18,8 @@ public interface DeptMapper {
 
     Dept queryEmpAndDeptByStepTwo(@Param("deptId") Integer deptId);
 
+    Dept queryDeptByDeptId(@Param("deptId")Integer deptId);
+
+    Dept queryDeptAndEmpByStepOne(@Param("deptId")Integer deptId);
+
 }

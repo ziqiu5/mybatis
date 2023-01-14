@@ -57,6 +57,11 @@
           select * from `t_emp` where `emp_id`  = #{empId}
     </select>
 
+    <!--  List<Emp> queryDeptAndEmpByStepTwo(@Param("deptId") Integer deptId); -->
+    <select id="queryDeptAndEmpByStepTwo" resultType="Emp">
+        select * from `t_emp` where `dept_id` = #{deptId}
+    </select>
+
 
 
 </mapper>
