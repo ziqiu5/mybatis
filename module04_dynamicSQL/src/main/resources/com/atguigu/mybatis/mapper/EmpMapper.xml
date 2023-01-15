@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace ： 需要被映射的接口全类名 -->
+<mapper namespace="com.atguigu.mybatis.mapper.EmpMapper">
+
+    <!-- 开启二级缓存 ,未指定 type时 默认开启的是MyBatis的二级缓存-->
+    <!--<cache/>-->
+
+    <!--  开启第三方(EhCache)的二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <!--  sql 片段-->
+    <sql id="t_empColumns">
+        `emp_id`,`emp_name`,`age`,`gender`
+    </sql>
+
+    <!-- List<Emp> list(); -->
+    <select id="list" resultType="Emp">
+        select
+        <include refid="t_empColumns"/>
+        from `t_emp`;
+    </select>
+
+
+    <!--  int batchAddEmp(@Param("emps") List<Emp> emps); -->
+    <insert id="batchAddEmp">
+        insert into `t_emp` values
+        <foreach collection="emps" item="emp" separator=",">
+            (null,#{emp.empName},#{emp.age},#{emp.gender},2)
+        </foreach>
+    </insert>
+
+
+    <!-- List<Emp> queryEmpByChoose(Emp emp); -->
+    <select id="queryEmpByChoose" resultType="Emp">
+        select
+        <include refid="t_empColumns"/>
+        from `t_emp`
+        <where>
+            <choose>
+                <when test="empName != null and empName != ''">
+                    `emp_name` = #{empName}
+                </when>
+                <when test="age != null and age != ''">
+                    `age` = #{age}
+                </when>
+                <when test="gender != null and gender != ''">
+                    `gender` = #{gender}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--     List<Emp> queryByCondition(Emp emp); -->
+    <select id="queryByCondition" resultType="Emp">
+        select * from `t_emp`
+        <!-- trim标签(通常和 if 标签搭配使用):
+                prefix suffix 属性:在内容的前后添加指定内容
+                preifxOverrids、suffixOverrids 属性:在内容的前后删除冗长多余的指定内容
+         -->
+        <trim prefix="where" prefixOverrides="and">
+            <if test="empName != null and empName != ''">
+                emp_name = #{empName}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+        </trim>
+    </select>
+
+    <!--     List<Emp> queryByCondition(Emp emp); -->
+    <select id="queryByConditionTwo" resultType="Emp">
+        select * from `t_emp`
+        <!-- where标签(通常和 if 标签搭配使用):
+                1.当where标签中没有任何条件成立的时候 在 sql语句中不会自动生成 where关键字
+                2.当有任意一个条件成立的时候 就会生成在 sql语句中生成 where关键字
+                3.若where中第一个判断条件不成立的时候 会自动将后面条件中多余的那一个and关键字删除
+         -->
+        <where>
+            <if test="empName != null and empName != ''">
+                emp_name = #{empName}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+
+    <!--     List<Emp> queryByCondition(Emp emp); -->
+    <select id="queryByConditionOne" resultType="Emp">
+        select * from `t_emp` where 1 = 1
+        <if test="empName != null and empName != ''">
+            and emp_name = #{empName}
+        </if>
+        <if test="age != null and age != ''">
+            and age = #{age}
+        </if>
+        <if test="gender != null and gender != ''">
+            and gender = #{gender}
+        </if>
+    </select>
+
+    <!-- int addEmp(@Param("emp") Emp emp); -->
+    <insert id="addEmp">
+        insert into `t_emp` values (null,#{emp.empName},#{emp.age},#{emp.gender},3);
+    </insert>
+
+    <!-- int batchDelete(@Param("ids") List<Integer> ids); -->
+    <delete id="batchDeleteOne">
+        delete from `t_emp` where `emp_id` in
+        <!--(-->
+        <!--<foreach collection="ids" item="id" separator=",">-->
+        <!--#{id}-->
+        <!--</foreach>-->
+        <!--)-->
+
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- int batchDelete(@Param("ids") List<Integer> ids); -->
+    <delete id="batchDelete">
+        delete from `t_emp` where
+        <foreach collection="ids" item="id" separator="or">
+            `emp_id` = #{id}
+        </foreach>
+    </delete>
+
+</mapper>
